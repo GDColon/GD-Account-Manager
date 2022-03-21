@@ -4,7 +4,7 @@ let gdPath = process.env.HOME || process.env.USERPROFILE + "/AppData/Local/Geome
 let profilePath = gdPath + "/Profiles"
 let gdFiles = ["CCGameManager.dat", "CCGameManager2.dat", "CCLocalLevels.dat", "CCLocalLevels2.dat"]
 
-if (!fs.existsSync(gdPath)) {console.log("You Geometry Dash directory could not be found! Make sure it's in AppData/Local/GeometryDash"); process.exit()}
+if (!fs.existsSync(gdPath)) {console.log("Your Geometry Dash directory could not be found! Make sure it's in AppData/Local/GeometryDash"); process.exit()}
 if (!fs.existsSync(profilePath)) {console.log("*No profiles folder found, created a new one"); fs.mkdirSync(profilePath)}
 
 function reset(text) {
@@ -44,7 +44,7 @@ input.question("What would you like to do?\n[1] Save profile\n[2] Load profile\n
             if (!selected) return reset("That profile doesn't exist!")
             let path = profilePath + "/" + selected
             let foundFiles = fs.readdirSync(path).filter(x => gdFiles.includes(x))
-            if (!foundFiles.length) return reset("Profile is empty!")
+            if (!foundFiles.length) return reset("That profile is empty!")
             foundFiles.forEach(f => {
                 fs.copyFile(`${path}/${f}`, `${gdPath}/${f}`, (err) => {if (err) console.log(err)});
             })
